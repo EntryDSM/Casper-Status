@@ -17,4 +17,6 @@ object DependencyVersion {
     const val SWAGGER = "2.7.0"
 
     const val SENTRY = "7.14.0"
+
+    const val RESILIENCE4J = "2.2.0"
 }

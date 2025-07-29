@@ -46,4 +46,9 @@ object Dependencies {
 
     // Sentry
     const val SENTRY_SPRING_BOOT_STARTER = "io.sentry:sentry-spring-boot-starter-jakarta:${DependencyVersion.SENTRY}"
+
+    //resilience4j
+    const val RESILIENCE4J = "io.github.resilience4j:resilience4j-circuitbreaker:${DependencyVersion.RESILIENCE4J}"
+    const val RESILIENCE4J_SPRING_BOOT = "io.github.resilience4j:resilience4j-spring-boot3:${DependencyVersion.RESILIENCE4J}"
+
 }

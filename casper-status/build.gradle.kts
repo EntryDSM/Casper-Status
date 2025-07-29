@@ -70,6 +70,10 @@ dependencies {
 
     // Sentry
     implementation(Dependencies.SENTRY_SPRING_BOOT_STARTER)
+
+    // Resilience4j
+    implementation(Dependencies.RESILIENCE4J)
+    implementation(Dependencies.RESILIENCE4J_SPRING_BOOT)
 }
 
 protobuf {
