@@ -1,6 +1,7 @@
 package hs.kr.entrydsm.status.global.error
 
 import hs.kr.entrydsm.status.global.error.exception.CasperException
+import io.github.resilience4j.circuitbreaker.CallNotPermittedException
 import org.springframework.context.MessageSource
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -26,7 +27,7 @@ class GlobalExceptionHandler(
      * @return 에러 코드에 따른 응답 엔티티
      */
     @ExceptionHandler(CasperException::class)
-    fun handlingEquusException(e: CasperException): ResponseEntity<ErrorResponse> {
+    fun handlingCasperException(e: CasperException): ResponseEntity<ErrorResponse> {
         val code = e.errorCode
         return ResponseEntity(
             ErrorResponse(code.status, code.message),
