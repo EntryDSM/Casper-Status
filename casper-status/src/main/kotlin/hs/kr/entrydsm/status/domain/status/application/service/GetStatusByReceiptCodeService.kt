@@ -34,7 +34,7 @@ class GetStatusByReceiptCodeService(
     override fun execute(receiptCode: Long): InternalStatusResponse {
         val status = queryStatusPort.findByReceiptCode(receiptCode) ?: throw StatusNotFoundException
 
-        if (!statusCacheRepository.existsById(receiptCode)) {
+        statusCacheRepository.findById(receiptCode).orElseGet {
             statusCacheRepository.save(StatusCache.from(status))
         }
 
