@@ -54,7 +54,7 @@ class InternalStatusController(
      * @param receiptCode 접수번호
      * @param examCode 새로운 수험번호
      */
-    @PutMapping("/{receipt-code}/exam-code")
+    @PutMapping("/{receipt-code}")
     fun updateExamCode(@PathVariable("receipt-code") receiptCode: Long, @RequestParam examCode: String) {
         updateExamCodeUseCase.execute(receiptCode, examCode)
     }
