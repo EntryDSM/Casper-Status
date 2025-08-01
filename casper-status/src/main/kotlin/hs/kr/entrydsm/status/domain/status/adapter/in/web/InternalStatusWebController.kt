@@ -4,6 +4,7 @@ import hs.kr.entrydsm.status.domain.status.application.port.`in`.GetAllStatusUse
 import hs.kr.entrydsm.status.domain.status.application.port.`in`.GetStatusByReceiptCodeUseCase
 import hs.kr.entrydsm.status.infrastructure.grpc.server.dto.response.InternalStatusResponse
 import hs.kr.entrydsm.status.domain.status.application.port.`in`.UpdateExamCodeUseCase
+import hs.kr.entrydsm.status.global.document.status.InternalStatusApiDocument
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PutMapping
@@ -25,7 +26,7 @@ class InternalStatusWebController(
     private val getStatusByReceiptCodeUseCase: GetStatusByReceiptCodeUseCase,
     private val getAllStatusUseCase: GetAllStatusUseCase,
     private val updateExamCodeUseCase: UpdateExamCodeUseCase
-) {
+) : InternalStatusApiDocument {
     
     /**
      * 접수번호로 상태를 조회합니다.
@@ -34,7 +35,7 @@ class InternalStatusWebController(
      * @return 지원자의 상태 정보
      */
     @GetMapping("/{receipt-code}")
-    fun getStatusByReceiptCode(@PathVariable("receipt-code") receiptCode: Long): InternalStatusResponse {
+    override fun getStatusByReceiptCode(@PathVariable("receipt-code") receiptCode: Long): InternalStatusResponse {
         return getStatusByReceiptCodeUseCase.execute(receiptCode)
     }
 
@@ -44,7 +45,7 @@ class InternalStatusWebController(
      * @return 전체 지원자 상태 정보 목록
      */
     @GetMapping("/list")
-    fun getAllStatus(): List<InternalStatusResponse> {
+    override fun getAllStatus(): List<InternalStatusResponse> {
         return getAllStatusUseCase.execute()
     }
 
@@ -55,7 +56,7 @@ class InternalStatusWebController(
      * @param examCode 새로운 수험번호
      */
     @PutMapping("/{receipt-code}")
-    fun updateExamCode(@PathVariable("receipt-code") receiptCode: Long, @RequestParam examCode: String) {
+    override fun updateExamCode(@PathVariable("receipt-code") receiptCode: Long, @RequestParam examCode: String) {
         updateExamCodeUseCase.execute(receiptCode, examCode)
     }
 }

@@ -51,7 +51,7 @@ interface AdminStatusApiDocument {
             content = arrayOf(Content())
         )
     )
-    fun updateIsPrintsArrived(
+    fun updateIsPrintsArrivedService(
         @Parameter(description = "접수번호", required = true)
         @PathVariable("receipt-code") receiptCode: Long
     )
