@@ -4,6 +4,7 @@ import hs.kr.entrydsm.status.domain.status.application.port.`in`.AnnounceResultU
 import hs.kr.entrydsm.status.domain.status.application.port.`in`.CancelApplicationSubmitUseCase
 import hs.kr.entrydsm.status.domain.status.application.port.`in`.StartScreeningUseCase
 import hs.kr.entrydsm.status.domain.status.application.port.`in`.UpdateIsPrintsArrivedUseCase
+import hs.kr.entrydsm.status.global.document.status.AdminStatusApiDocument
 import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.RequestMapping
@@ -25,7 +26,7 @@ class AdminWebController(
     private val cancelApplicationSubmitUseCase: CancelApplicationSubmitUseCase,
     private val startScreeningUseCase: StartScreeningUseCase,
     private val announceResultUseCase: AnnounceResultUseCase
-) {
+) : AdminStatusApiDocument {
     
     /**
      * 지원서 제출을 취소합니다.
@@ -34,7 +35,7 @@ class AdminWebController(
      * @param receiptCode 접수번호
      */
     @PatchMapping("/submitted/{receipt-code}")
-    fun cancelApplicationSubmit(@PathVariable("receipt-code") receiptCode: Long) {
+    override fun cancelApplicationSubmit(@PathVariable("receipt-code") receiptCode: Long) {
         cancelApplicationSubmitUseCase.execute(receiptCode)
     }
 
@@ -45,7 +46,7 @@ class AdminWebController(
      * @param receiptCode 접수번호
      */
     @PatchMapping("/prints-arrived/{receipt-code}")
-    fun updateIsPrintsArrivedService(@PathVariable("receipt-code") receiptCode: Long) {
+    override fun updateIsPrintsArrivedService(@PathVariable("receipt-code") receiptCode: Long) {
         updateIsPrintsArrivedUseCase.execute(receiptCode)
     }
 
@@ -56,7 +57,7 @@ class AdminWebController(
      * @param receiptCode 접수번호
      */
     @PatchMapping("/screening/{receipt-code}")
-    fun startScreening(@PathVariable("receipt-code") receiptCode: Long) {
+    override fun startScreening(@PathVariable("receipt-code") receiptCode: Long) {
         startScreeningUseCase.execute(receiptCode)
     }
 
@@ -67,7 +68,7 @@ class AdminWebController(
      * @param receiptCode 접수번호
      */
     @PatchMapping("/announce/{receipt-code}")
-    fun announceResult(@PathVariable("receipt-code") receiptCode: Long) {
+    override fun announceResult(@PathVariable("receipt-code") receiptCode: Long) {
         announceResultUseCase.execute(receiptCode)
     }
 }
