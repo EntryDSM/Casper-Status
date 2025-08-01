@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController
  */
 @RestController
 @RequestMapping("/internal/status")
-class InternalStatusController(
+class InternalStatusWebController(
     private val getStatusByReceiptCodeUseCase: GetStatusByReceiptCodeUseCase,
     private val getAllStatusUseCase: GetAllStatusUseCase,
     private val updateExamCodeUseCase: UpdateExamCodeUseCase

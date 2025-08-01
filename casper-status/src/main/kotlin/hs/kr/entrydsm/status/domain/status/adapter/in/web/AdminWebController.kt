@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController
  */
 @RestController
 @RequestMapping("/admin/status")
-class AdminController(
+class AdminWebController(
     private val updateIsPrintsArrivedUseCase: UpdateIsPrintsArrivedUseCase,
     private val cancelApplicationSubmitUseCase: CancelApplicationSubmitUseCase,
     private val startScreeningUseCase: StartScreeningUseCase,
