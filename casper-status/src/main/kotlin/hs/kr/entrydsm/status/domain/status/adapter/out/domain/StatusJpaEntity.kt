@@ -29,10 +29,9 @@ class StatusJpaEntity(
     var examCode: String? = null,
     var isFirstRoundPass: Boolean = false,
     var isSecondRoundPass: Boolean = false,
-    val receiptCode: Long
+    var receiptCode: Long = 0
 ) {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long = 0
-
+    var id: Long = 0
 }
