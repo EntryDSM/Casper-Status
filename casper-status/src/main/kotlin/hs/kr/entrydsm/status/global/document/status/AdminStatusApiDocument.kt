@@ -30,6 +30,9 @@ interface AdminStatusApiDocument {
             content = arrayOf(Content())
         )
     )
+    /**
+     * 제출된 지원서를 작성 중 상태로 되돌립니다.
+     */
     fun cancelApplicationSubmit(
         @Parameter(description = "접수번호", required = true)
         @PathVariable("receipt-code") receiptCode: Long
@@ -51,6 +54,9 @@ interface AdminStatusApiDocument {
             content = arrayOf(Content())
         )
     )
+    /**
+     * 등기우편으로 제출된 서류의 도착을 확인합니다.
+     */
     fun updateIsPrintsArrivedService(
         @Parameter(description = "접수번호", required = true)
         @PathVariable("receipt-code") receiptCode: Long
@@ -72,6 +78,9 @@ interface AdminStatusApiDocument {
             content = arrayOf(Content())
         )
     )
+    /**
+     * 서류 검토 완료 후 1차 또는 2차 전형을 시작합니다.
+     */
     fun startScreening(
         @Parameter(description = "접수번호", required = true)
         @PathVariable("receipt-code") receiptCode: Long
@@ -93,6 +102,9 @@ interface AdminStatusApiDocument {
             content = arrayOf(Content())
         )
     )
+    /**
+     * 최종 전형 결과를 발표하고 합격 여부 확인 상태로 변경합니다.
+     */
     fun announceResult(
         @Parameter(description = "접수번호", required = true)
         @PathVariable("receipt-code") receiptCode: Long

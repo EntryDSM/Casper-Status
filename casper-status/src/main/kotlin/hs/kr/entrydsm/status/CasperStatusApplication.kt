@@ -4,8 +4,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
 @SpringBootApplication
+/**
+ * 이 클래스이 무슨 일을 하는지 설명합니다.
+ */
 class CasperStatusApplication
-
+/**
+ * 이 클래스이 무슨 일을 하는지 설명합니다.
+ */
 fun main(args: Array<String>) {
     runApplication<CasperStatusApplication>(*args)
 }

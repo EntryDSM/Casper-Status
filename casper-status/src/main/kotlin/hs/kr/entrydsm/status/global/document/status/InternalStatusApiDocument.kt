@@ -33,6 +33,9 @@ interface InternalStatusApiDocument {
             content = arrayOf(Content())
         )
     )
+    /**
+     * 접수번호로 지원자의 상태 정보를 조회합니다.
+     */
     fun getStatusByReceiptCode(
         @Parameter(description = "조회할 접수번호", required = true)
         @PathVariable("receipt-code") receiptCode: Long
@@ -49,6 +52,9 @@ interface InternalStatusApiDocument {
             content = arrayOf(Content(schema = Schema(implementation = Array<InternalStatusResponse>::class)))
         )
     )
+    /**
+     * 모든 지원자의 상태 정보 목록을 조회합니다.
+     */
     fun getAllStatus(): List<InternalStatusResponse>
 
     @Operation(
@@ -67,6 +73,9 @@ interface InternalStatusApiDocument {
             content = arrayOf(Content())
         )
     )
+    /**
+     * 지원자의 수험번호를 업데이트합니다.
+     */
     fun updateExamCode(
         @Parameter(description = "접수번호", required = true)
         @PathVariable("receipt-code") receiptCode: Long,
