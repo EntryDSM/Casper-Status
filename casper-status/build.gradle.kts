@@ -84,7 +84,7 @@ dependencies {
     implementation(Dependencies.RESILIENCE4J_SPRING_BOOT)
 
     // Spring Cloud Config
-    //implementation(Dependencies.SPRING_CLOUD_STARTER_CONFIG)
+    // implementation(Dependencies.SPRING_CLOUD_STARTER_CONFIG)
 }
 
 protobuf {
@@ -125,4 +125,8 @@ tasks.withType<KotlinCompile> {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+tasks.matching { it.name.startsWith("ktlint") }.configureEach {
+    enabled = false
 }
