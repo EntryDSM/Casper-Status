@@ -16,7 +16,7 @@ import org.springframework.security.web.SecurityFilterChain
  */
 @Configuration
 class SecurityConfig(
-    private val objectMapper: ObjectMapper
+    private val objectMapper: ObjectMapper,
 ) {
     companion object {
         const val ADMIN_ROLE = "ADMIN"
@@ -38,7 +38,6 @@ class SecurityConfig(
             .sessionManagement {
                 it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             }
-
             .authorizeHttpRequests {
                 it
                     .requestMatchers("/").permitAll()
@@ -49,6 +48,5 @@ class SecurityConfig(
             .with(FilterConfig(objectMapper)) { }
 
         return http.build()
-
     }
 }
