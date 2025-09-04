@@ -15,7 +15,7 @@ import org.springframework.kafka.support.serializer.JsonDeserializer
 @EnableKafka
 @Configuration
 class KafkaConsumerConfig(
-    private val kafkaProperty: KafkaProperty
+    private val kafkaProperty: KafkaProperty,
 ) {
     @Bean
     fun kafkaListenerContainerFactory(): ConcurrentKafkaListenerContainerFactory<String, String> {
@@ -40,8 +40,8 @@ class KafkaConsumerConfig(
             "security.protocol" to "SASL_PLAINTEXT",
             "sasl.mechanism" to "SCRAM-SHA-512",
             "sasl.jaas.config" to "org.apache.kafka.common.security.scram.ScramLoginModule required " +
-                    "username=\"${kafkaProperty.confluentApiKey}\" " +
-                    "password=\"${kafkaProperty.confluentApiSecret}\";"
+                "username=\"${kafkaProperty.confluentApiKey}\" " +
+                "password=\"${kafkaProperty.confluentApiSecret}\";",
         )
     }
 }

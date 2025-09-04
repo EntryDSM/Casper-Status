@@ -17,7 +17,7 @@ class StatusConsumer(
     private val mapper: ObjectMapper,
     private val createStatusUseCase: CreateStatusUseCase,
     private val updateStatusUseCase: UpdateStatusUseCase,
-    private val deleteStatusUseCase: DeleteStatusUseCase
+    private val deleteStatusUseCase: DeleteStatusUseCase,
 ) {
     /**
      * 원서가 생성되면, 원서 상태를 생성합니다.
@@ -27,7 +27,7 @@ class StatusConsumer(
     @KafkaListener(
         topics = [KafkaTopics.CREATE_APPLICATION],
         groupId = "create-status",
-        containerFactory = "kafkaListenerContainerFactory"
+        containerFactory = "kafkaListenerContainerFactory",
     )
     fun createStatus(message: String) {
         val createApplicationEvent = mapper.readValue(message, CreateApplicationEvent::class.java)
@@ -42,7 +42,7 @@ class StatusConsumer(
     @KafkaListener(
         topics = [KafkaTopics.SUBMIT_APPLICATION_FINAL],
         groupId = "update-status",
-        containerFactory = "kafkaListenerContainerFactory"
+        containerFactory = "kafkaListenerContainerFactory",
     )
     fun updateStatus(message: String) {
         val receiptCode = mapper.readValue(message, Long::class.java)
@@ -57,7 +57,7 @@ class StatusConsumer(
     @KafkaListener(
         topics = [KafkaTopics.DELETE_USER],
         groupId = "delete-status",
-        containerFactory = "kafkaListenerContainerFactory"
+        containerFactory = "kafkaListenerContainerFactory",
     )
     fun deleteStatus(message: String) {
         val receiptCode = mapper.readValue(message, Long::class.java)
