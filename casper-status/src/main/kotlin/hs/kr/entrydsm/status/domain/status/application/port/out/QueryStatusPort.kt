@@ -7,7 +7,6 @@ import hs.kr.entrydsm.status.domain.status.model.Status
  * 헥사고날 아키텍처에서 도메인 계층이 인프라스트럭처 계층과 통신하기 위한 인터페이스입니다.
  */
 interface QueryStatusPort {
-
     /**
      * 접수번호로 상태 정보를 조회합니다.
      *
@@ -15,12 +14,11 @@ interface QueryStatusPort {
      * @return 조회된 상태 도메인 모델 (없으면 null)
      */
     fun findByReceiptCode(receiptCode: Long): Status?
-    
+
     /**
      * 모든 상태 정보를 조회합니다.
      *
      * @return 모든 상태 도메인 모델 리스트
      */
     fun findAll(): List<Status>
-
 }

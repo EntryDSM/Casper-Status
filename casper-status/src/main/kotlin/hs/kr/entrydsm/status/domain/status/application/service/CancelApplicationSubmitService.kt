@@ -17,9 +17,8 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 class CancelApplicationSubmitService(
     private val queryStatusPort: QueryStatusPort,
-    private val saveStatusPort: SaveStatusPort
-): CancelApplicationSubmitUseCase {
-    
+    private val saveStatusPort: SaveStatusPort,
+) : CancelApplicationSubmitUseCase {
     /**
      * 지원서 제출을 취소합니다.
      * 제출된 지원서를 작성 중 상태로 되돌립니다.
@@ -29,8 +28,9 @@ class CancelApplicationSubmitService(
      */
     @Transactional
     override fun execute(receiptCode: Long) {
-        val status = queryStatusPort.findByReceiptCode(receiptCode)
-            ?: throw StatusNotFoundException
+        val status =
+            queryStatusPort.findByReceiptCode(receiptCode)
+                ?: throw StatusNotFoundException
 
         val canceledStatus = status.cancelSubmit()
         saveStatusPort.save(canceledStatus)

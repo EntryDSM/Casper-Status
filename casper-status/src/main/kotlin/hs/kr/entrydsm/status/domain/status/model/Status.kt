@@ -20,7 +20,6 @@ data class Status(
     val isSecondRoundPass: Boolean,
     val receiptCode: Long,
 ) {
-
     /**
      * 지원서를 제출 상태로 변경합니다.
      *

@@ -1,6 +1,5 @@
 package hs.kr.entrydsm.status.domain.status.application.service
 
-import hs.kr.entrydsm.status.domain.status.adapter.out.persistence.repository.StatusRepository
 import hs.kr.entrydsm.status.domain.status.application.port.`in`.DeleteStatusUseCase
 import hs.kr.entrydsm.status.domain.status.application.port.out.DeleteStatusPort
 import org.springframework.stereotype.Service
@@ -14,9 +13,8 @@ import org.springframework.transaction.annotation.Transactional
  */
 @Service
 class DeleteStatusService(
-    private val deleteStatusPort: DeleteStatusPort
-): DeleteStatusUseCase {
-    
+    private val deleteStatusPort: DeleteStatusPort,
+) : DeleteStatusUseCase {
     /**
      * 접수번호로 상태 정보를 삭제합니다.
      *

@@ -8,7 +8,6 @@ package hs.kr.entrydsm.status.global.mapper
  * @param D 도메인 모델 타입
  */
 interface GenericMapper<E, D> {
-
     /**
      * 도메인 모델을 엔티티로 변환합니다.
      *
@@ -23,7 +22,7 @@ interface GenericMapper<E, D> {
      * @param entity 변환할 엔티티 (null 가능)
      * @return 변환된 도메인 모델 (null 가능)
      */
-    fun toModel (entity: E?): D?
+    fun toModel(entity: E?): D?
 
     /**
      * 엔티티를 도메인 모델로 변환합니다.

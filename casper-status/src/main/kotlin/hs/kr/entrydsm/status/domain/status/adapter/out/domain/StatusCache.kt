@@ -21,19 +21,14 @@ import org.springframework.data.redis.core.TimeToLive
 class StatusCache(
     @Id
     val receiptCode: Long,
-
     val applicationStatus: ApplicationStatus,
-
     val examCode: String?,
-
     val isFirstRoundPass: Boolean,
-
     val isSecondRoundPass: Boolean,
-
     @TimeToLive
-    var ttl: Long
-){
-    companion object{
+    var ttl: Long,
+) {
+    companion object {
         /**
          * Status 도메인 모델로부터 StatusCache 인스턴스를 생성합니다.
          *
@@ -43,11 +38,11 @@ class StatusCache(
         fun from(status: Status): StatusCache {
             return StatusCache(
                 receiptCode = status.receiptCode,
-                applicationStatus =  status.applicationStatus,
+                applicationStatus = status.applicationStatus,
                 examCode = status.examCode,
                 isFirstRoundPass = status.isFirstRoundPass,
                 isSecondRoundPass = status.isSecondRoundPass,
-                ttl = 60 * 10
+                ttl = 60 * 10,
             )
         }
     }

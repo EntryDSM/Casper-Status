@@ -5,7 +5,6 @@ package hs.kr.entrydsm.status.domain.status.application.port.`in`
  * 지원자의 상태 정보를 업데이트하는 기능을 정의합니다.
  */
 interface UpdateStatusUseCase {
-
     /**
      * 상태를 업데이트합니다.
      *

@@ -19,5 +19,5 @@ data class InternalStatusResponse(
     var examCode: String? = null,
     var isFirstRoundPass: Boolean = false,
     var isSecondRoundPass: Boolean = false,
-    val receiptCode: Long
+    val receiptCode: Long,
 )

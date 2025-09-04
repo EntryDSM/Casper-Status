@@ -25,9 +25,8 @@ class AdminWebController(
     private val updateIsPrintsArrivedUseCase: UpdateIsPrintsArrivedUseCase,
     private val cancelApplicationSubmitUseCase: CancelApplicationSubmitUseCase,
     private val startScreeningUseCase: StartScreeningUseCase,
-    private val announceResultUseCase: AnnounceResultUseCase
+    private val announceResultUseCase: AnnounceResultUseCase,
 ) : AdminStatusApiDocument {
-    
     /**
      * 지원서 제출을 취소합니다.
      * 제출된 지원서를 작성 중 상태로 되돌립니다.
@@ -35,7 +34,9 @@ class AdminWebController(
      * @param receiptCode 접수번호
      */
     @PatchMapping("/submitted/{receipt-code}")
-    override fun cancelApplicationSubmit(@PathVariable("receipt-code") receiptCode: Long) {
+    override fun cancelApplicationSubmit(
+        @PathVariable("receipt-code") receiptCode: Long,
+    ) {
         cancelApplicationSubmitUseCase.execute(receiptCode)
     }
 
@@ -46,7 +47,9 @@ class AdminWebController(
      * @param receiptCode 접수번호
      */
     @PatchMapping("/prints-arrived/{receipt-code}")
-    override fun updateIsPrintsArrivedService(@PathVariable("receipt-code") receiptCode: Long) {
+    override fun updateIsPrintsArrivedService(
+        @PathVariable("receipt-code") receiptCode: Long,
+    ) {
         updateIsPrintsArrivedUseCase.execute(receiptCode)
     }
 
@@ -57,7 +60,9 @@ class AdminWebController(
      * @param receiptCode 접수번호
      */
     @PatchMapping("/screening/{receipt-code}")
-    override fun startScreening(@PathVariable("receipt-code") receiptCode: Long) {
+    override fun startScreening(
+        @PathVariable("receipt-code") receiptCode: Long,
+    ) {
         startScreeningUseCase.execute(receiptCode)
     }
 
@@ -68,7 +73,9 @@ class AdminWebController(
      * @param receiptCode 접수번호
      */
     @PatchMapping("/announce/{receipt-code}")
-    override fun announceResult(@PathVariable("receipt-code") receiptCode: Long) {
+    override fun announceResult(
+        @PathVariable("receipt-code") receiptCode: Long,
+    ) {
         announceResultUseCase.execute(receiptCode)
     }
 }

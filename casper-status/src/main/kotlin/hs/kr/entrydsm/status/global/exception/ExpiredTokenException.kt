@@ -8,5 +8,5 @@ import hs.kr.entrydsm.status.global.error.exception.ErrorCode
  * JWT 토큰의 유효 기간이 만료된 경우 사용됩니다.
  */
 object ExpiredTokenException : CasperException(
-    ErrorCode.EXPIRED_TOKEN
+    ErrorCode.EXPIRED_TOKEN,
 )

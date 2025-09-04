@@ -17,9 +17,8 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 class UpdateExamCodeService(
     private val queryStatusPort: QueryStatusPort,
-    private val saveStatusPort: SaveStatusPort
-): UpdateExamCodeUseCase {
-    
+    private val saveStatusPort: SaveStatusPort,
+) : UpdateExamCodeUseCase {
     /**
      * 수험번호를 업데이트합니다.
      *
@@ -28,7 +27,10 @@ class UpdateExamCodeService(
      * @throws StatusNotFoundException 해당 접수번호의 상태가 존재하지 않는 경우
      */
     @Transactional
-    override fun execute(receiptCode: Long, examCode: String) {
+    override fun execute(
+        receiptCode: Long,
+        examCode: String,
+    ) {
         val status = queryStatusPort.findByReceiptCode(receiptCode) ?: throw StatusNotFoundException
 
         val updatedExamCode = status.changeExamCode(examCode)

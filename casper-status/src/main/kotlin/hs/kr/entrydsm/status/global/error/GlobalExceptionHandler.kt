@@ -17,9 +17,8 @@ import org.springframework.web.bind.annotation.RestControllerAdvice
  */
 @RestControllerAdvice
 class GlobalExceptionHandler(
-    private val messageSource: MessageSource
+    private val messageSource: MessageSource,
 ) {
-
     /**
      * Casper 애플리케이션의 커스텀 예외를 처리합니다.
      *
@@ -31,7 +30,7 @@ class GlobalExceptionHandler(
         val code = e.errorCode
         return ResponseEntity(
             ErrorResponse(code.status, code.message),
-            HttpStatus.valueOf(code.status)
+            HttpStatus.valueOf(code.status),
         )
     }
 
@@ -45,7 +44,7 @@ class GlobalExceptionHandler(
     fun handleCallNotPermittedException(e: CallNotPermittedException): ResponseEntity<ErrorResponse> {
         return ResponseEntity(
             ErrorResponse(500, "server error"),
-            HttpStatus.valueOf(500)
+            HttpStatus.valueOf(500),
         )
     }
 
@@ -60,9 +59,9 @@ class GlobalExceptionHandler(
         return ResponseEntity(
             ErrorResponse(
                 400,
-                e.bindingResult.allErrors[0].defaultMessage
+                e.bindingResult.allErrors[0].defaultMessage,
             ),
-            HttpStatus.BAD_REQUEST
+            HttpStatus.BAD_REQUEST,
         )
     }
 }

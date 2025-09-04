@@ -19,9 +19,8 @@ import java.nio.charset.StandardCharsets
  * @property objectMapper JSON 직렬화를 위한 ObjectMapper
  */
 class GlobalExceptionFilter(
-    private val objectMapper: ObjectMapper
+    private val objectMapper: ObjectMapper,
 ) : OncePerRequestFilter() {
-
     /**
      * 필터 체인에서 발생하는 예외를 처리합니다.
      * CasperException과 일반 Exception을 구분하여 처리하고, Sentry로 예외를 추적합니다.
@@ -33,7 +32,7 @@ class GlobalExceptionFilter(
     override fun doFilterInternal(
         request: HttpServletRequest,
         response: HttpServletResponse,
-        filterChain: FilterChain
+        filterChain: FilterChain,
     ) {
         try {
             filterChain.doFilter(request, response)
@@ -56,7 +55,10 @@ class GlobalExceptionFilter(
      * @throws IOException 응답 작성 중 IO 오류 발생 시
      */
     @Throws(IOException::class)
-    private fun writerErrorCode(response: HttpServletResponse, errorCode: ErrorCode) {
+    private fun writerErrorCode(
+        response: HttpServletResponse,
+        errorCode: ErrorCode,
+    ) {
         val errorResponse = ErrorResponse(errorCode.status, errorCode.message)
         response.status = errorCode.status
         response.characterEncoding = StandardCharsets.UTF_8.name()

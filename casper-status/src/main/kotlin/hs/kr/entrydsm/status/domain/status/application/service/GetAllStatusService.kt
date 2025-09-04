@@ -1,8 +1,8 @@
 package hs.kr.entrydsm.status.domain.status.application.service
 
-import hs.kr.entrydsm.status.infrastructure.grpc.server.dto.response.InternalStatusResponse
 import hs.kr.entrydsm.status.domain.status.application.port.`in`.GetAllStatusUseCase
 import hs.kr.entrydsm.status.domain.status.application.port.out.QueryStatusPort
+import hs.kr.entrydsm.status.infrastructure.grpc.server.dto.response.InternalStatusResponse
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -16,8 +16,7 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 class GetAllStatusService(
     private val queryStatusPort: QueryStatusPort,
-): GetAllStatusUseCase {
-    
+) : GetAllStatusUseCase {
     /**
      * 모든 상태 정보를 조회합니다.
      *
@@ -29,11 +28,11 @@ class GetAllStatusService(
         return status.map {
             InternalStatusResponse(
                 id = it.id!!,
-                applicationStatus =  it.applicationStatus,
+                applicationStatus = it.applicationStatus,
                 receiptCode = it.receiptCode,
                 examCode = it.examCode,
                 isFirstRoundPass = it.isFirstRoundPass,
-                isSecondRoundPass = it.isSecondRoundPass
+                isSecondRoundPass = it.isSecondRoundPass,
             )
         }
     }

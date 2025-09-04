@@ -16,9 +16,8 @@ import org.springframework.stereotype.Service
 @Service
 class StartScreeningService(
     private val queryStatusPort: QueryStatusPort,
-    private val saveStatusPort: SaveStatusPort
-): StartScreeningUseCase {
-
+    private val saveStatusPort: SaveStatusPort,
+) : StartScreeningUseCase {
     /**
      * 전형을 시작합니다.
      * 서류 접수 완료 상태에서 전형 진행 중 상태로 변경합니다.
@@ -26,7 +25,7 @@ class StartScreeningService(
      * @param receiptCode 접수번호
      * @throws StatusNotFoundException 해당 접수번호의 상태가 존재하지 않는 경우
      */
-    override fun execute(receiptCode: Long){
+    override fun execute(receiptCode: Long) {
         val status = queryStatusPort.findByReceiptCode(receiptCode) ?: throw StatusNotFoundException
         val screeningStatus = status.startScreening()
         saveStatusPort.save(screeningStatus)

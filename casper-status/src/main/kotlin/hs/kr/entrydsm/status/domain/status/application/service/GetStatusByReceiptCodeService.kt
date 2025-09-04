@@ -1,11 +1,11 @@
 package hs.kr.entrydsm.status.domain.status.application.service
 
-import hs.kr.entrydsm.status.infrastructure.grpc.server.dto.response.InternalStatusResponse
 import hs.kr.entrydsm.status.domain.status.adapter.out.domain.StatusCache
 import hs.kr.entrydsm.status.domain.status.adapter.out.persistence.repository.StatusCacheRepository
 import hs.kr.entrydsm.status.domain.status.application.port.`in`.GetStatusByReceiptCodeUseCase
 import hs.kr.entrydsm.status.domain.status.application.port.out.QueryStatusPort
 import hs.kr.entrydsm.status.domain.status.exception.StatusNotFoundException
+import hs.kr.entrydsm.status.infrastructure.grpc.server.dto.response.InternalStatusResponse
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -20,9 +20,8 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 class GetStatusByReceiptCodeService(
     private val queryStatusPort: QueryStatusPort,
-    private val statusCacheRepository: StatusCacheRepository
-): GetStatusByReceiptCodeUseCase {
-    
+    private val statusCacheRepository: StatusCacheRepository,
+) : GetStatusByReceiptCodeUseCase {
     /**
      * 접수번호로 상태 정보를 조회합니다.
      * 캐시가 없는 경우 새로 생성하여 저장합니다.

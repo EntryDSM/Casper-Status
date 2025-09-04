@@ -19,8 +19,7 @@ import org.springframework.transaction.annotation.Transactional
 class UpdateIsPrintsArrivedService(
     private val queryStatusPort: QueryStatusPort,
     private val saveStatusPort: SaveStatusPort,
-): UpdateIsPrintsArrivedUseCase {
-    
+) : UpdateIsPrintsArrivedUseCase {
     /**
      * 서류 도착 상태를 업데이트합니다.
      * 서류 도착 대기 상태에서 서류 접수 완료 상태로 변경합니다.
@@ -29,8 +28,9 @@ class UpdateIsPrintsArrivedService(
      * @throws StatusNotFoundException 해당 접수번호의 상태가 존재하지 않는 경우
      */
     override fun execute(receiptCode: Long) {
-        val status = queryStatusPort.findByReceiptCode(receiptCode)
-            ?: throw StatusNotFoundException
+        val status =
+            queryStatusPort.findByReceiptCode(receiptCode)
+                ?: throw StatusNotFoundException
 
         val updatedStatus = status.markDocumentsArrived()
         saveStatusPort.save(updatedStatus)

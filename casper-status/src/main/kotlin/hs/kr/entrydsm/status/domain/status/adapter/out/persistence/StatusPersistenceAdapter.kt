@@ -17,8 +17,7 @@ import org.springframework.stereotype.Component
 class StatusPersistenceAdapter(
     private val statusRepository: StatusRepository,
     private val statusMapper: StatusMapper,
-): StatusPort {
-
+) : StatusPort {
     /**
      * 상태 정보를 저장합니다.
      *

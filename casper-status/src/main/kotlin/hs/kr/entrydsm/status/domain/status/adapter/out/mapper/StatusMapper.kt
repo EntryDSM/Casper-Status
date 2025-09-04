@@ -10,8 +10,7 @@ import org.mapstruct.Mapper
  * MapStruct를 사용하여 도메인 계층과 인프라스트럭처 계층 간의 데이터 변환을 처리합니다.
  */
 @Mapper(componentModel = "spring")
-abstract class StatusMapper: GenericMapper<StatusJpaEntity, Status> {
-
+abstract class StatusMapper : GenericMapper<StatusJpaEntity, Status> {
     /**
      * Status 도메인 모델을 StatusJpaEntity로 변환합니다.
      *

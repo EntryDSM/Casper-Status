@@ -18,9 +18,8 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 class CreateStatusService(
     private val queryStatusPort: QueryStatusPort,
-    private val saveStatusPort: SaveStatusPort
-): CreateStatusUseCase {
-    
+    private val saveStatusPort: SaveStatusPort,
+) : CreateStatusUseCase {
     /**
      * 새로운 지원자의 초기 상태를 생성합니다.
      * 이미 상태가 존재하는 경우 생성하지 않습니다.
@@ -29,15 +28,16 @@ class CreateStatusService(
      */
     @Transactional
     override fun execute(receiptCode: Long) {
-        queryStatusPort.findByReceiptCode(receiptCode)?: saveStatusPort.save(
-            Status(
-                id = null,
-                applicationStatus = ApplicationStatus.NOT_APPLIED,
-                examCode = null,
-                isFirstRoundPass = false,
-                isSecondRoundPass = false,
-                receiptCode = receiptCode,
+        queryStatusPort.findByReceiptCode(receiptCode)
+            ?: saveStatusPort.save(
+                Status(
+                    id = null,
+                    applicationStatus = ApplicationStatus.NOT_APPLIED,
+                    examCode = null,
+                    isFirstRoundPass = false,
+                    isSecondRoundPass = false,
+                    receiptCode = receiptCode,
+                ),
             )
-        )
     }
 }

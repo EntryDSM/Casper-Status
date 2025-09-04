@@ -17,7 +17,6 @@ import org.springframework.web.filter.OncePerRequestFilter
  * HTTP 요청 헤더에서 사용자 정보를 추출하여 Spring Security 컨텍스트에 설정합니다.
  */
 class JwtFilter : OncePerRequestFilter() {
-    
     /**
      * 요청마다 실행되는 필터 로직입니다.
      * 요청 헤더에서 사용자 ID와 역할을 추출하여 인증 컨텍스트를 설정합니다.
@@ -29,7 +28,7 @@ class JwtFilter : OncePerRequestFilter() {
     override fun doFilterInternal(
         request: HttpServletRequest,
         response: HttpServletResponse,
-        filterChain: FilterChain
+        filterChain: FilterChain,
     ) {
         val userId: String? = request.getHeader("Request-User-Id")
         val role: UserRole? = request.getHeader("Request-User-Role")?.let { UserRole.valueOf(it) }
@@ -56,8 +55,10 @@ class JwtFilter : OncePerRequestFilter() {
 enum class UserRole {
     /** 최고 관리자 */
     ROOT,
+
     /** 관리자 */
     ADMIN,
+
     /** 일반 사용자 */
-    USER
+    USER,
 }

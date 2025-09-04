@@ -16,70 +16,70 @@ import org.springframework.web.bind.annotation.RequestParam
  */
 @Tag(name = "Internal Status", description = "내부 시스템용 지원 상태 API")
 interface InternalStatusApiDocument {
-
+    /**
+     * 접수번호로 지원자의 상태 정보를 조회합니다.
+     */
     @Operation(
         summary = "접수번호로 상태 조회",
-        description = "특정 접수번호의 지원 상태 정보를 조회합니다. 캐시를 활용하여 성능을 최적화합니다."
+        description = "특정 접수번호의 지원 상태 정보를 조회합니다. 캐시를 활용하여 성능을 최적화합니다.",
     )
     @ApiResponses(
         ApiResponse(
             responseCode = "200",
             description = "상태 조회 성공",
-            content = arrayOf(Content(schema = Schema(implementation = InternalStatusResponse::class)))
-        ), // todo: 나중에 머지 했을 때도 오류 났을 경우 수정하기
+            content = arrayOf(Content(schema = Schema(implementation = InternalStatusResponse::class))),
+        ),
+        // todo: 나중에 머지 했을 때도 오류 났을 경우 수정하기
         ApiResponse(
             responseCode = "404",
             description = "상태를 찾을 수 없음 - Status Not Found",
-            content = arrayOf(Content())
-        )
+            content = arrayOf(Content()),
+        ),
     )
-    /**
-     * 접수번호로 지원자의 상태 정보를 조회합니다.
-     */
     fun getStatusByReceiptCode(
         @Parameter(description = "조회할 접수번호", required = true)
-        @PathVariable("receipt-code") receiptCode: Long
+        @PathVariable("receipt-code") receiptCode: Long,
     ): InternalStatusResponse
 
+    /**
+     * 모든 지원자의 상태 정보 목록을 조회합니다.
+     */
     @Operation(
         summary = "모든 상태 조회",
-        description = "전체 지원자의 상태 정보 목록을 조회합니다."
+        description = "전체 지원자의 상태 정보 목록을 조회합니다.",
     )
     @ApiResponses(
         ApiResponse(
             responseCode = "200",
             description = "전체 상태 조회 성공",
-            content = arrayOf(Content(schema = Schema(implementation = Array<InternalStatusResponse>::class)))
-        )
+            content = arrayOf(Content(schema = Schema(implementation = Array<InternalStatusResponse>::class))),
+        ),
     )
-    /**
-     * 모든 지원자의 상태 정보 목록을 조회합니다.
-     */
     fun getAllStatus(): List<InternalStatusResponse>
 
+    /**
+     * 지원자의 수험번호를 업데이트합니다.
+     */
     @Operation(
         summary = "수험번호 업데이트",
-        description = "특정 접수번호의 수험번호를 업데이트합니다."
+        description = "특정 접수번호의 수험번호를 업데이트합니다.",
     )
     @ApiResponses(
         ApiResponse(
             responseCode = "204",
             description = "수험번호 업데이트 성공",
-            content = arrayOf(Content())
+            content = arrayOf(Content()),
         ),
         ApiResponse(
             responseCode = "404",
             description = "상태를 찾을 수 없음 - Status Not Found",
-            content = arrayOf(Content())
-        )
+            content = arrayOf(Content()),
+        ),
     )
-    /**
-     * 지원자의 수험번호를 업데이트합니다.
-     */
     fun updateExamCode(
         @Parameter(description = "접수번호", required = true)
         @PathVariable("receipt-code") receiptCode: Long,
         @Parameter(description = "새로운 수험번호", required = true)
-        @RequestParam examCode: String
+        @RequestParam examCode: String,
     )
 }

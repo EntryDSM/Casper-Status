@@ -11,7 +11,6 @@ import org.springframework.stereotype.Component
  */
 @Component
 class StatusGrpcMapper {
-
     /**
      * 상태 리스트를 gRPC 응답으로 변환합니다.
      *
@@ -43,14 +42,14 @@ class StatusGrpcMapper {
      * @return gRPC 상태 정보 요소
      */
     private fun toStatusInfoElement(response: InternalStatusResponse): StatusServiceProto.StatusInfoElement {
-            return StatusServiceProto.StatusInfoElement.newBuilder()
-                .setId(response.id)
-                .setApplicationStatus(toProtoApplicationStatus(response.applicationStatus))
-                .setExamCode(response.examCode)
-                .setIsFirstRoundPass(response.isFirstRoundPass)
-                .setIsSecondRoundPass(response.isSecondRoundPass)
-                .setReceiptCode(response.receiptCode)
-                .build()
+        return StatusServiceProto.StatusInfoElement.newBuilder()
+            .setId(response.id)
+            .setApplicationStatus(toProtoApplicationStatus(response.applicationStatus))
+            .setExamCode(response.examCode)
+            .setIsFirstRoundPass(response.isFirstRoundPass)
+            .setIsSecondRoundPass(response.isSecondRoundPass)
+            .setReceiptCode(response.receiptCode)
+            .build()
     }
 
     /**
@@ -60,14 +59,14 @@ class StatusGrpcMapper {
      * @return gRPC 프로토콜 지원 상태
      */
     private fun toProtoApplicationStatus(applicationStatus: ApplicationStatus): StatusServiceProto.ApplicationStatus {
-            return when (applicationStatus){
-                ApplicationStatus.NOT_APPLIED -> StatusServiceProto.ApplicationStatus.NOT_APPLIED
-                ApplicationStatus.SUBMITTED ->  StatusServiceProto.ApplicationStatus.SUBMITTED
-                ApplicationStatus.WRITING ->  StatusServiceProto.ApplicationStatus.WRITING
-                ApplicationStatus.WAITING_DOCUMENTS ->  StatusServiceProto.ApplicationStatus.WAITING_DOCUMENTS
-                ApplicationStatus.DOCUMENTS_RECEIVED ->  StatusServiceProto.ApplicationStatus.DOCUMENTS_RECEIVED
-                ApplicationStatus.SCREENING_IN_PROGRESS -> StatusServiceProto.ApplicationStatus.SCREENING_IN_PROGRESS
-                ApplicationStatus.RESULT_ANNOUNCED -> StatusServiceProto.ApplicationStatus.RESULT_ANNOUNCED
-            }
+        return when (applicationStatus) {
+            ApplicationStatus.NOT_APPLIED -> StatusServiceProto.ApplicationStatus.NOT_APPLIED
+            ApplicationStatus.SUBMITTED -> StatusServiceProto.ApplicationStatus.SUBMITTED
+            ApplicationStatus.WRITING -> StatusServiceProto.ApplicationStatus.WRITING
+            ApplicationStatus.WAITING_DOCUMENTS -> StatusServiceProto.ApplicationStatus.WAITING_DOCUMENTS
+            ApplicationStatus.DOCUMENTS_RECEIVED -> StatusServiceProto.ApplicationStatus.DOCUMENTS_RECEIVED
+            ApplicationStatus.SCREENING_IN_PROGRESS -> StatusServiceProto.ApplicationStatus.SCREENING_IN_PROGRESS
+            ApplicationStatus.RESULT_ANNOUNCED -> StatusServiceProto.ApplicationStatus.RESULT_ANNOUNCED
+        }
     }
 }

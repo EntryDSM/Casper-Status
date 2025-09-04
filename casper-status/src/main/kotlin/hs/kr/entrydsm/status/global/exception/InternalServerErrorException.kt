@@ -8,5 +8,5 @@ import hs.kr.entrydsm.status.global.error.exception.ErrorCode
  * 예상치 못한 서버 측 오류가 발생한 경우 사용됩니다.
  */
 object InternalServerErrorException : CasperException(
-    ErrorCode.INTERNAL_SERVER_ERROR
+    ErrorCode.INTERNAL_SERVER_ERROR,
 )

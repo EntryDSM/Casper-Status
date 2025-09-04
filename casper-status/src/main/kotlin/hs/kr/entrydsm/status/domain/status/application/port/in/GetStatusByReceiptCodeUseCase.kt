@@ -7,7 +7,6 @@ import hs.kr.entrydsm.status.infrastructure.grpc.server.dto.response.InternalSta
  * 특정 접수번호의 상태 정보를 조회하는 기능을 정의합니다.
  */
 interface GetStatusByReceiptCodeUseCase {
-
     /**
      * 접수번호로 상태 정보를 조회합니다.
      *

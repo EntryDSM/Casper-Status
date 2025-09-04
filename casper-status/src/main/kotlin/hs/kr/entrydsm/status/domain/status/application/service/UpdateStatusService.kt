@@ -19,9 +19,8 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 class UpdateStatusService(
     private val queryStatusPort: QueryStatusPort,
-    private val saveStatusPort: SaveStatusPort
-): UpdateStatusUseCase {
-    
+    private val saveStatusPort: SaveStatusPort,
+) : UpdateStatusUseCase {
     /**
      * 지원서 제출 상태를 업데이트합니다.
      * 제출 상태로 변경한 후 자동으로 서류 도착 대기 상태로 변경합니다.

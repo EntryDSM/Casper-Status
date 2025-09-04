@@ -14,5 +14,5 @@ import org.springframework.boot.context.properties.ConfigurationProperties
 class JwtProperties(
     val secretKey: String,
     val header: String,
-    val prefix: String
+    val prefix: String,
 )

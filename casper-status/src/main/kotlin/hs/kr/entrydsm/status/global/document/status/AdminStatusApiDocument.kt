@@ -13,100 +13,99 @@ import org.springframework.web.bind.annotation.PathVariable
  */
 @Tag(name = "Admin Status", description = "관리자용 지원 상태 관리 API")
 interface AdminStatusApiDocument {
-
+    /**
+     * 제출된 지원서를 작성 중 상태로 되돌립니다.
+     */
     @Operation(
         summary = "지원서 제출 취소",
-        description = "제출된 지원서를 작성 중 상태로 되돌립니다. 관리자 전용 기능입니다."
+        description = "제출된 지원서를 작성 중 상태로 되돌립니다. 관리자 전용 기능입니다.",
     )
     @ApiResponses(
         ApiResponse(
             responseCode = "204",
             description = "지원서 제출 취소 성공",
-            content = arrayOf(Content())
+            content = arrayOf(Content()),
         ),
         ApiResponse(
             responseCode = "404",
             description = "상태를 찾을 수 없음 - Status Not Found",
-            content = arrayOf(Content())
-        )
+            content = arrayOf(Content()),
+        ),
     )
-    /**
-     * 제출된 지원서를 작성 중 상태로 되돌립니다.
-     */
     fun cancelApplicationSubmit(
         @Parameter(description = "접수번호", required = true)
-        @PathVariable("receipt-code") receiptCode: Long
+        @PathVariable("receipt-code") receiptCode: Long,
     )
 
+    /**
+     * 등기우편으로 제출된 서류의 도착을 확인합니다.
+     */
     @Operation(
         summary = "서류 도착 확인",
-        description = "등기우편으로 제출된 서류의 도착을 확인하여 서류 접수 완료 상태로 변경합니다."
+        description = "등기우편으로 제출된 서류의 도착을 확인하여 서류 접수 완료 상태로 변경합니다.",
     )
     @ApiResponses(
         ApiResponse(
             responseCode = "204",
             description = "서류 도착 확인 성공",
-            content = arrayOf(Content())
+            content = arrayOf(Content()),
         ),
         ApiResponse(
             responseCode = "404",
             description = "상태를 찾을 수 없음 - Status Not Found",
-            content = arrayOf(Content())
-        )
+            content = arrayOf(Content()),
+        ),
     )
-    /**
-     * 등기우편으로 제출된 서류의 도착을 확인합니다.
-     */
     fun updateIsPrintsArrivedService(
         @Parameter(description = "접수번호", required = true)
-        @PathVariable("receipt-code") receiptCode: Long
+        @PathVariable("receipt-code") receiptCode: Long,
     )
 
+    /**
+     * 서류 검토 완료 후 1차 또는 2차 전형을 시작합니다.
+     */
     @Operation(
         summary = "전형 시작",
-        description = "서류 검토가 완료된 후 1차 또는 2차 전형을 시작합니다."
+        description = "서류 검토가 완료된 후 1차 또는 2차 전형을 시작합니다.",
     )
     @ApiResponses(
         ApiResponse(
             responseCode = "204",
             description = "전형 시작 성공",
-            content = arrayOf(Content())
+            content = arrayOf(Content()),
         ),
         ApiResponse(
             responseCode = "404",
             description = "상태를 찾을 수 없음 - Status Not Found",
-            content = arrayOf(Content())
-        )
+            content = arrayOf(Content()),
+        ),
     )
-    /**
-     * 서류 검토 완료 후 1차 또는 2차 전형을 시작합니다.
-     */
     fun startScreening(
         @Parameter(description = "접수번호", required = true)
-        @PathVariable("receipt-code") receiptCode: Long
+        @PathVariable("receipt-code") receiptCode: Long,
     )
 
+    /**
+     * 최종 전형 결과를 발표하고 합격 여부 확인 상태로 변경합니다.
+     */
     @Operation(
         summary = "합격 결과 발표",
-        description = "최종 전형 결과를 발표하고 합격 여부 확인 상태로 변경합니다."
+        description = "최종 전형 결과를 발표하고 합격 여부 확인 상태로 변경합니다.",
     )
     @ApiResponses(
         ApiResponse(
             responseCode = "204",
             description = "합격 결과 발표 성공",
-            content = arrayOf(Content())
+            content = arrayOf(Content()),
         ),
         ApiResponse(
             responseCode = "404",
             description = "상태를 찾을 수 없음 - Status Not Found",
-            content = arrayOf(Content())
-        )
+            content = arrayOf(Content()),
+        ),
     )
-    /**
-     * 최종 전형 결과를 발표하고 합격 여부 확인 상태로 변경합니다.
-     */
     fun announceResult(
         @Parameter(description = "접수번호", required = true)
-        @PathVariable("receipt-code") receiptCode: Long
+        @PathVariable("receipt-code") receiptCode: Long,
     )
 }
