@@ -85,6 +85,9 @@ dependencies {
 
     // Spring Cloud Config
     // implementation(Dependencies.SPRING_CLOUD_STARTER_CONFIG)
+
+    // Kafka
+    implementation(Dependencies.KAFKA)
 }
 
 protobuf {
