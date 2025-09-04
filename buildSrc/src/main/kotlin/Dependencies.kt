@@ -53,4 +53,7 @@ object Dependencies {
 
     // Spring Cloud Config
     const val SPRING_CLOUD_STARTER_CONFIG = "org.springframework.cloud:spring-cloud-starter-config"
+
+    // Kafka
+    const val KAFKA = "org.springframework.kafka:spring-kafka"
 }
