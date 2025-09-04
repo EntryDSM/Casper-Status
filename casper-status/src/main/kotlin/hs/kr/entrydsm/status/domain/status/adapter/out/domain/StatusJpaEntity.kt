@@ -29,7 +29,7 @@ class StatusJpaEntity(
     var examCode: String? = null,
     var isFirstRoundPass: Boolean = false,
     var isSecondRoundPass: Boolean = false,
-    var receiptCode: Long = 0
+    var receiptCode: Long = 0,
 ) {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

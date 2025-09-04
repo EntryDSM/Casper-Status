@@ -4,6 +4,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     id(Plugin.KOTLIN_JVM) version PluginVersion.KOTLIN_VERSION
     id(Plugin.KOTLIN_SPRING) version PluginVersion.KOTLIN_VERSION
+    id(Plugin.KOTLIN_JPA) version PluginVersion.KOTLIN_VERSION
     id(Plugin.KOTLIN_KAPT)
     id(Plugin.SPRING_BOOT) version PluginVersion.SPRING_BOOT_VERSION
     id(Plugin.SPRING_DEPENDENCY_MANAGEMENT) version PluginVersion.SPRING_DEPENDENCY_MANAGEMENT_VERSION
@@ -83,7 +84,7 @@ dependencies {
     implementation(Dependencies.RESILIENCE4J_SPRING_BOOT)
 
     // Spring Cloud Config
-    implementation(Dependencies.SPRING_CLOUD_STARTER_CONFIG)
+    //implementation(Dependencies.SPRING_CLOUD_STARTER_CONFIG)
 }
 
 protobuf {
