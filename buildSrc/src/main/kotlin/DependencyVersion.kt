@@ -20,5 +20,5 @@ object DependencyVersion {
 
     const val RESILIENCE4J = "2.2.0"
 
-    const val SPRING_CLOUD = "2023.0.3"
+    const val SPRING_CLOUD = "2024.0.2"
 }
