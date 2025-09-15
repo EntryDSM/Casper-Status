@@ -43,6 +43,7 @@ class SecurityConfig(
                     .requestMatchers("/").permitAll()
                     .requestMatchers("/internal/**").hasRole(UserRole.ROOT.name)
                     .requestMatchers("/admin").hasRole(UserRole.ADMIN.name)
+                    .requestMatchers("/swagger-ui/**").permitAll()
                     .anyRequest().authenticated()
             }
             .with(FilterConfig(objectMapper)) { }
