@@ -42,7 +42,7 @@ class SecurityConfig(
                 it
                     .requestMatchers("/").permitAll()
                     .requestMatchers("/internal/**").hasRole(UserRole.ROOT.name)
-                    .requestMatchers("/admin").hasRole(UserRole.ADMIN.name)
+                    .requestMatchers("/admin/**").hasRole(UserRole.ADMIN.name)
                     .requestMatchers("/swagger-ui/**").permitAll()
                     .requestMatchers("/v3/api-docs/**").permitAll()
                     .requestMatchers("/swagger-resources/**").permitAll()
