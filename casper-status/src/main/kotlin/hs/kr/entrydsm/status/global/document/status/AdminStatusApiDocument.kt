@@ -62,6 +62,30 @@ interface AdminStatusApiDocument {
     )
 
     /**
+     * 등기우편으로 제출된 서류의 도착을 수정합니다.
+     */
+    @Operation(
+        summary = "서류 도착 수정",
+        description = "서류 접수 완료 상태에서 서류 도착 대기 상태로 변경합니다.",
+    )
+    @ApiResponses(
+        ApiResponse(
+            responseCode = "204",
+            description = "서류 도착 수정 성공",
+            content = arrayOf(Content()),
+        ),
+        ApiResponse(
+            responseCode = "404",
+            description = "상태를 찾을 수 없음 - Status Not Found",
+            content = arrayOf(Content()),
+        ),
+    )
+    fun updateIsNotPrintsArrivedService(
+        @Parameter(description = "접수번호", required = true)
+        @PathVariable("receipt-code") receiptCode: Long,
+    )
+
+    /**
      * 서류 검토 완료 후 1차 또는 2차 전형을 시작합니다.
      */
     @Operation(
