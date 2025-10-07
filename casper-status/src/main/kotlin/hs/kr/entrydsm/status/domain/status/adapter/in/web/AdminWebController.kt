@@ -3,6 +3,7 @@ package hs.kr.entrydsm.status.domain.status.adapter.`in`.web
 import hs.kr.entrydsm.status.domain.status.application.port.`in`.AnnounceResultUseCase
 import hs.kr.entrydsm.status.domain.status.application.port.`in`.CancelApplicationSubmitUseCase
 import hs.kr.entrydsm.status.domain.status.application.port.`in`.StartScreeningUseCase
+import hs.kr.entrydsm.status.domain.status.application.port.`in`.UpdateIsNotPrintsArrivedUseCase
 import hs.kr.entrydsm.status.domain.status.application.port.`in`.UpdateIsPrintsArrivedUseCase
 import hs.kr.entrydsm.status.global.document.status.AdminStatusApiDocument
 import org.springframework.web.bind.annotation.PatchMapping
@@ -26,6 +27,7 @@ class AdminWebController(
     private val cancelApplicationSubmitUseCase: CancelApplicationSubmitUseCase,
     private val startScreeningUseCase: StartScreeningUseCase,
     private val announceResultUseCase: AnnounceResultUseCase,
+    private val updateIsNotPrintsArrivedUseCase: UpdateIsNotPrintsArrivedUseCase
 ) : AdminStatusApiDocument {
     /**
      * 지원서 제출을 취소합니다.
@@ -51,6 +53,19 @@ class AdminWebController(
         @PathVariable("receipt-code") receiptCode: Long,
     ) {
         updateIsPrintsArrivedUseCase.execute(receiptCode)
+    }
+
+    /**
+     * 서류 도착을 수정합니다.
+     * 서류의 도착 여부를 관리자가 확인하여 상태를 서류 도착 대기 상태로 변경합니다.
+     *
+     * @param receiptCode 접수번호
+     */
+    @PatchMapping("/prints-not-arrived/{receipt-code}")
+    override fun updateIsNotPrintsArrivedService(
+        @PathVariable("receipt-code") receiptCode: Long,
+    ) {
+        updateIsNotPrintsArrivedUseCase.execute(receiptCode)
     }
 
     /**

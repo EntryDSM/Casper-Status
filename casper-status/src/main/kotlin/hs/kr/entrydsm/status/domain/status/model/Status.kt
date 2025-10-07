@@ -48,6 +48,15 @@ data class Status(
     }
 
     /**
+     * 서류가 도착했음을 미표시하고 서류 도착 대기 상태로 변경합니다.
+     *
+     * @return 서류 도착 대기 상태로 변경된 Status 인스턴스
+     */
+    fun markDocumentsNotArrived(): Status {
+        return copy(applicationStatus = ApplicationStatus.WAITING_DOCUMENTS)
+    }
+
+    /**
      * 전형을 시작하고 전형 진행 중 상태로 변경합니다.
      *
      * @return 전형 진행 중 상태로 변경된 Status 인스턴스
