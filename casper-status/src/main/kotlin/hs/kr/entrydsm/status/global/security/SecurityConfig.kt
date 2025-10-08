@@ -18,9 +18,6 @@ import org.springframework.security.web.SecurityFilterChain
 class SecurityConfig(
     private val objectMapper: ObjectMapper,
 ) {
-    companion object {
-        const val ADMIN_ROLE = "ADMIN"
-    }
 
     /**
      * Spring Security 필터 체인을 구성합니다.
