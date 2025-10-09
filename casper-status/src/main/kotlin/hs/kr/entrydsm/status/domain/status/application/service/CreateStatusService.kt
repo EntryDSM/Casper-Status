@@ -32,7 +32,7 @@ class CreateStatusService(
             ?: saveStatusPort.save(
                 Status(
                     id = null,
-                    applicationStatus = ApplicationStatus.NOT_APPLIED,
+                    applicationStatus = ApplicationStatus.SUBMITTED,
                     examCode = null,
                     isFirstRoundPass = false,
                     isSecondRoundPass = false,
