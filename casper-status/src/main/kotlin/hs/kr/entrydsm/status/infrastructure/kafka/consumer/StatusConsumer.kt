@@ -55,7 +55,7 @@ class StatusConsumer(
      * @param message 탈퇴한 유저의 접수 번호
      */
     @KafkaListener(
-        topics = [KafkaTopics.DELETE_USER],
+        topics = [KafkaTopics.DELETE_USER, KafkaTopics.DELETE_STATUS],
         groupId = "delete-status",
         containerFactory = "kafkaListenerContainerFactory",
     )

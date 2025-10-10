@@ -18,4 +18,6 @@ object KafkaTopics {
      * 최종 제출 토픽
      */
     const val SUBMIT_APPLICATION_FINAL = "submit-application-final"
+
+    const val DELETE_STATUS = "delete-status"
 }
