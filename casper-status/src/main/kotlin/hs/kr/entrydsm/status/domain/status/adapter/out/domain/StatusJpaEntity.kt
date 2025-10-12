@@ -27,7 +27,9 @@ class StatusJpaEntity(
     var applicationStatus: ApplicationStatus = ApplicationStatus.NOT_APPLIED,
     @Column(unique = true)
     var examCode: String? = null,
+    @Column(name = "is_first_round_pass")
     var isFirstRoundPass: Boolean = false,
+    @Column(name = "is_second_round_pass")
     var isSecondRoundPass: Boolean = false,
     var receiptCode: Long = 0,
 ) {
