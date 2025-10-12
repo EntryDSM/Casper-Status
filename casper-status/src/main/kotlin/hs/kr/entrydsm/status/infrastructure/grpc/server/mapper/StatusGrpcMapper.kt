@@ -45,7 +45,7 @@ class StatusGrpcMapper {
         return StatusServiceProto.StatusInfoElement.newBuilder()
             .setId(response.id)
             .setApplicationStatus(toProtoApplicationStatus(response.applicationStatus))
-            .setExamCode(response.examCode)
+            .setExamCode(response.examCode ?: "")
             .setIsFirstRoundPass(response.isFirstRoundPass)
             .setIsSecondRoundPass(response.isSecondRoundPass)
             .setReceiptCode(response.receiptCode)
