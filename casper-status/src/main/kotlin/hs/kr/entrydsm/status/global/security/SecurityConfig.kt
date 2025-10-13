@@ -1,7 +1,6 @@
 package hs.kr.entrydsm.status.global.security
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import hs.kr.entrydsm.status.global.security.jwt.UserRole
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
@@ -20,6 +19,9 @@ class SecurityConfig(
     private val objectMapper: ObjectMapper,
 ) {
 
+    companion object {
+        private const val ADMIN_ROLE = "ADMIN"
+    }
     /**
      * Spring Security 필터 체인을 구성합니다.
      * HTTP 보안 설정 및 경로별 접근 권한을 정의합니다.
@@ -48,8 +50,8 @@ class SecurityConfig(
             .authorizeHttpRequests {
                 it
                     .requestMatchers("/").permitAll()
-                    .requestMatchers("/internal/status/**").hasRole(UserRole.ROOT.name)
-                    .requestMatchers("/admin/status/**").hasRole(UserRole.ADMIN.name)
+                    .requestMatchers("/internal/status/**").hasRole(ADMIN_ROLE)
+                    .requestMatchers("/admin/status/**").hasRole(ADMIN_ROLE)
                     .requestMatchers("/swagger-ui/**").permitAll()
                     .requestMatchers("/v3/api-docs/**").permitAll()
                     .requestMatchers("/swagger-resources/**").permitAll()
