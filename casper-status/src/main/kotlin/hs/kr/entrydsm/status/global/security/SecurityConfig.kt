@@ -22,6 +22,7 @@ class SecurityConfig(
     companion object {
         private const val ADMIN_ROLE = "ADMIN"
     }
+
     /**
      * Spring Security 필터 체인을 구성합니다.
      * HTTP 보안 설정 및 경로별 접근 권한을 정의합니다.
@@ -33,22 +34,13 @@ class SecurityConfig(
     protected fun filterChain(http: HttpSecurity): SecurityFilterChain {
         http
             .csrf { it.disable() }
-            .cors { cors ->
-                cors.configurationSource { request ->
-                    val configuration = CorsConfiguration()
-                    configuration.allowedOriginPatterns = listOf("*")
-                    configuration.allowedMethods = listOf("*")
-                    configuration.allowedHeaders = listOf("*")
-                    configuration.allowCredentials = true
-                    configuration
-                }
-            }
+            .cors { }
             .formLogin { it.disable() }
             .sessionManagement {
                 it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             }
-            .authorizeHttpRequests {
-                it
+            .authorizeHttpRequests { auth ->
+                auth
                     .requestMatchers("/").permitAll()
                     .requestMatchers("/internal/status/**").hasRole(ADMIN_ROLE)
                     .requestMatchers("/admin/status/**").hasRole(ADMIN_ROLE)
