@@ -44,7 +44,7 @@ class SecurityConfig(
                 auth
                     .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                     .requestMatchers("/internal/status/**").hasRole(ADMIN_ROLE)
-                    .requestMatchers("/admin/**").hasRole(ADMIN_ROLE)
+                    .requestMatchers("/admin/status/**").hasRole(ADMIN_ROLE)
                     .requestMatchers("/swagger-ui/**").permitAll()
                     .requestMatchers("/v3/api-docs/**").permitAll()
                     .requestMatchers("/swagger-resources/**").permitAll()
