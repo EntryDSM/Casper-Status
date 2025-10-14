@@ -3,6 +3,7 @@ package hs.kr.entrydsm.status.global.security
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.http.HttpMethod
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.web.SecurityFilterChain
@@ -41,7 +42,7 @@ class SecurityConfig(
             }
             .authorizeHttpRequests { auth ->
                 auth
-                    .requestMatchers("/").permitAll()
+                    .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                     .requestMatchers("/internal/status/**").hasRole(ADMIN_ROLE)
                     .requestMatchers("/admin/status/**").hasRole(ADMIN_ROLE)
                     .requestMatchers("/swagger-ui/**").permitAll()
