@@ -9,7 +9,5 @@ import org.springframework.boot.context.properties.ConfigurationPropertiesBindin
 @ConfigurationPropertiesBinding
 @ConfigurationProperties("kafka")
 class KafkaProperty(
-    val serverAddress: String,
-    val confluentApiKey: String,
-    val confluentApiSecret: String,
+    val serverAddress: String
 )
