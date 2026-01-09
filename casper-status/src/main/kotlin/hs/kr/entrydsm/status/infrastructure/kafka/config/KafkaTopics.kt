@@ -20,4 +20,9 @@ object KafkaTopics {
     const val SUBMIT_APPLICATION_FINAL = "submit-application-final"
 
     const val DELETE_STATUS = "delete-status"
+
+    /**
+     * 원서 삭제 실패 토픽
+     */
+    const val DELETE_APPLICATION_FAILED = "delete-application-failed"
 }
