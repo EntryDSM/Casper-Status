@@ -14,10 +14,5 @@ object KafkaTopics {
      */
     const val DELETE_USER = "delete-user"
 
-    /**
-     * 최종 제출 토픽
-     */
-    const val SUBMIT_APPLICATION_FINAL = "submit-application-final"
-
-    const val DELETE_STATUS = "delete-status"
+    const val CANCEL_SUBMITTED_APPLICATION = "cancel-submitted-application"
 }
