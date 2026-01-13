@@ -3,7 +3,6 @@ package hs.kr.entrydsm.status.infrastructure.kafka.consumer
 import com.fasterxml.jackson.databind.ObjectMapper
 import hs.kr.entrydsm.status.domain.status.application.port.`in`.CreateStatusUseCase
 import hs.kr.entrydsm.status.domain.status.application.port.`in`.DeleteStatusUseCase
-import hs.kr.entrydsm.status.domain.status.application.port.`in`.UpdateStatusUseCase
 import hs.kr.entrydsm.status.infrastructure.kafka.config.KafkaTopics
 import hs.kr.entrydsm.status.infrastructure.kafka.consumer.dto.CreateApplicationEvent
 import org.springframework.kafka.annotation.KafkaListener
@@ -16,7 +15,6 @@ import org.springframework.stereotype.Component
 class StatusConsumer(
     private val mapper: ObjectMapper,
     private val createStatusUseCase: CreateStatusUseCase,
-    private val updateStatusUseCase: UpdateStatusUseCase,
     private val deleteStatusUseCase: DeleteStatusUseCase,
 ) {
     /**
@@ -35,27 +33,12 @@ class StatusConsumer(
     }
 
     /**
-     * 최종 제출된 원서의 상태를 변경합니다.
-     *
-     * @param message 최종 제출된 원서의 접수 번호
-     */
-    @KafkaListener(
-        topics = [KafkaTopics.SUBMIT_APPLICATION_FINAL],
-        groupId = "update-status",
-        containerFactory = "kafkaListenerContainerFactory",
-    )
-    fun updateStatus(message: String) {
-        val receiptCode = mapper.readValue(message, Long::class.java)
-        updateStatusUseCase.execute(receiptCode)
-    }
-
-    /**
      * 탈퇴한 유저의 원서 상태를 삭제합니다.
      *
      * @param message 탈퇴한 유저의 접수 번호
      */
     @KafkaListener(
-        topics = [KafkaTopics.DELETE_USER, KafkaTopics.DELETE_STATUS],
+        topics = [KafkaTopics.DELETE_USER, KafkaTopics.CANCEL_SUBMITTED_APPLICATION],
         groupId = "delete-status",
         containerFactory = "kafkaListenerContainerFactory",
     )
