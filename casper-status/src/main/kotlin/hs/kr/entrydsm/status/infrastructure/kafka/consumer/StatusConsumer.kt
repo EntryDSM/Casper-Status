@@ -32,13 +32,8 @@ class StatusConsumer(
         createStatusUseCase.execute(createApplicationEvent.receiptCode)
     }
 
-    /**
-     * 탈퇴한 유저의 원서 상태를 삭제합니다.
-     *
-     * @param message 탈퇴한 유저의 접수 번호
-     */
     @KafkaListener(
-        topics = [KafkaTopics.DELETE_USER, KafkaTopics.CANCEL_SUBMITTED_APPLICATION],
+        topics = [KafkaTopics.DELETE_USER, KafkaTopics.CANCEL_SUBMITTED_APPLICATION, KafkaTopics.USER_RECEIPT_CODE_UPDATE_FAILED],
         groupId = "delete-status",
         containerFactory = "kafkaListenerContainerFactory",
     )
