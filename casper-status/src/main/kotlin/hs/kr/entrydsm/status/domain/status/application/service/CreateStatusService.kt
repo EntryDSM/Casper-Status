@@ -5,8 +5,11 @@ import hs.kr.entrydsm.status.domain.status.application.port.out.QueryStatusPort
 import hs.kr.entrydsm.status.domain.status.application.port.out.SaveStatusPort
 import hs.kr.entrydsm.status.domain.status.model.ApplicationStatus
 import hs.kr.entrydsm.status.domain.status.model.Status
+import hs.kr.entrydsm.status.infrastructure.kafka.producer.StatusEventProducer
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
+import org.springframework.transaction.support.TransactionSynchronization
+import org.springframework.transaction.support.TransactionSynchronizationManager
 
 /**
  * 상태 생성 서비스 클래스입니다.
@@ -19,6 +22,7 @@ import org.springframework.transaction.annotation.Transactional
 class CreateStatusService(
     private val queryStatusPort: QueryStatusPort,
     private val saveStatusPort: SaveStatusPort,
+    private val statusEventProducer: StatusEventProducer
 ) : CreateStatusUseCase {
     /**
      * 새로운 지원자의 초기 상태를 생성합니다.
@@ -28,16 +32,35 @@ class CreateStatusService(
      */
     @Transactional
     override fun execute(receiptCode: Long) {
-        queryStatusPort.findByReceiptCode(receiptCode)
-            ?: saveStatusPort.save(
-                Status(
-                    id = null,
-                    applicationStatus = ApplicationStatus.SUBMITTED,
-                    examCode = null,
-                    isFirstRoundPass = false,
-                    isSecondRoundPass = false,
-                    receiptCode = receiptCode,
-                ),
-            )
+        try {
+            queryStatusPort.findByReceiptCode(receiptCode)
+                ?: saveStatusPort.save(
+                    Status(
+                        id = null,
+                        applicationStatus = ApplicationStatus.SUBMITTED,
+                        examCode = null,
+                        isFirstRoundPass = false,
+                        isSecondRoundPass = false,
+                        receiptCode = receiptCode,
+                    ),
+                )
+
+            registerAfterCommitCallback(receiptCode)
+        } catch (e: Exception) {
+            statusEventProducer.sendStatusCreatedFailed(receiptCode)
+            throw e
+        }
+    }
+
+    private fun registerAfterCommitCallback(
+        receiptCode: Long,
+    ) {
+        val callback =
+            object : TransactionSynchronization {
+                override fun afterCommit() {
+                    statusEventProducer.sendStatusCreatedCompleted(receiptCode)
+                }
+            }
+        TransactionSynchronizationManager.registerSynchronization(callback)
     }
 }
